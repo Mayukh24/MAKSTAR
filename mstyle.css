@@ -5,11 +5,13 @@
     flex-direction: row;
     margin: 2rem;
     padding: 1rem;
+    background-color: rgba(24, 21, 32, 0.712);
 }
 
 .left{    
     padding: 1rem;
-    background-color: rgba(24, 21, 32, 0.712);
+    background-color: rgba(40, 40, 41, 0.712);
+    max-width: 260px;
 }
 
 .extra-info ul{
@@ -25,6 +27,7 @@
 
 .right{
     margin: 1rem;
+
 }
 
 .right h1{
@@ -55,25 +58,27 @@
     color: white;
 }
 
-.tags{
+.tags, .tagss{
     margin-top: 5.5rem;
     float: right;
+    color: white;
     margin-right: 2rem;
+    padding: 5px;
+    cursor: pointer;
 }
 
-.tags select{
+.tags option, .tagss option{
     background-color: transparent;      
     color: white;
     padding: 0.3rem;
     padding-right: 1rem;
     padding-left: 0.4rem;
+    background-color: #323232
     
 }
-
-.tags option{
-    background-color: #323232
-}
-
 button{
     cursor: pointer;
 }
+.tag:first-child { 
+    display: none;
+   }
