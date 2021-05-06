@@ -14,6 +14,7 @@ const seriesw = document.getElementById('tv-series-w')
 const a = document.querySelector('.addList');
 const gcinema = document.getElementById('gcinema')
 const gseries = document.getElementById('gseries')
+const submitButton = document.querySelector(".search3")
 
 
 
@@ -257,25 +258,34 @@ function showSSeries(series) {
 }
 
 
-
+//SUBMIT-BUTTON
+submitButton.addEventListener("click", submitInput);
 
 
 
 //SUBMIT
-form.addEventListener('submit', (e) => {
+function submitInput(e) {
     e.preventDefault();
     const searchTerm = search.value
         if(searchTerm && searchTerm !== '') {
             getSMovies(SEARCH_API + searchTerm)
             getSSeries(SEARCH_SAPI + searchTerm)
-
+            window.location = 'search.html';
+            sessionStorage.setItem('getSeries', SEARCH_SAPI + searchTerm);
+            sessionStorage.setItem('getMovies', SEARCH_API + searchTerm);
         } else {
             window.location.reload()
         }
-    
    
 
-})
+}
+
+function searchFunction(){
+  let search1 = sessionStorage.getItem('getSeries');
+  let search2 = sessionStorage.getItem('getMovies');
+  getSMovies(search2);
+  getSSeries(search1);
+}
 
 
 
@@ -295,8 +305,7 @@ function getIndividual(){
     .then((response)=>{
         let movie = response.data;
         const { title, poster_path, overview, genres, release_date, vote_average, imdb_id, run_time, backdrop_path, production_companies, status, id, runtime} = movie
-
-       
+        
         n = ifItIncludes(id);
         mId = id;
         

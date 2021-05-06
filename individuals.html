@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="mstyle.css" />
     <link rel="stylesheet" href="responsive.css" />
     <link href="https://kit-pro.fontawesome.com/releases/v5.15.3/css/pro.min.css" rel="stylesheet">
+    <link rel = "shortcut icon" type = "image/x-icon" href = "./images/makstarlogo_xAk_icon.ico"/>
     <title>Movie App</title>
   </head>
-  <body data-barba="wrapper">
+  <body>
 
 
     <header>
@@ -26,10 +27,15 @@
           <li><a href = "wishlist.html">Watchlist</a></li>
           <li></li>
         </ul>
-      </div> 
+      </div>
       <div class="right-hand-side">
-        <i class="fal fa-search" class="search0" onclick="myFunction()"></i>
-      </div>     
+        <form id="form" autocomplete="off">
+          <input type="text" id="search" class="search1" placeholder="Search">
+          <button class = "search3" type = "submit">            
+            <i class="fal fa-search" class="search0"></i>
+          </button>
+      </form>
+    </div>     
     </header>
 
 
