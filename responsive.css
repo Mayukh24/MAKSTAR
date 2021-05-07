@@ -22,7 +22,7 @@
         font-size: 0.7rem;
         margin-right: 10px;
     }
-    .scroll-c{
+    .scroll-c, .scroll-c1, .scroll-c2, .scroll-c3, .scroll-c4, .scroll-c5, .scroll-c6, .scroll-c7{
         height: 160px;
         margin-bottom: 0;
     }
@@ -227,7 +227,7 @@
         font-size: 0.7rem;
         margin-right: 10px;
     }
-    .scroll-c{
+    .scroll-c, .scroll-c1, .scroll-c2, .scroll-c3, .scroll-c4, .scroll-c5, .scroll-c6, .scroll-c7{
         height: 160px;
         margin-bottom: 0;
     }
@@ -451,5 +451,8 @@
     #headin{
         margin: 0;
         margin-top: 4rem;
+    }
+    .slide-left-m, .slide-right-m, .slide-left-s, .slide-right-s, .slide-left-m1, .slide-right-m1, .slide-left-s1, .slide-right-s1, .slide-left-m2, .slide-right-m2, .slide-left-s2, .slide-right-s2, .slide-left-m3, .slide-right-m3, .slide-left-s3, .slide-right-s3{
+        display: none;
     }
 }
