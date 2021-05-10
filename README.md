@@ -11,4 +11,4 @@ Its a simple website that helps user to discover movies and series. It uses TMdB
   - Easy to use interface with eye catching animations.
   - Genre Sorting.
   - Wishlist Feature which enables the user to save their favourite movies and series which does not get deleted once the browser is closed and can only be removed by the user's choics
-  - Effective fast searching.
+  - It's completely mobile responsive.
