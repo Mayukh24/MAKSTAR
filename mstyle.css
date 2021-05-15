@@ -41,7 +41,7 @@
     color: rgb(196, 113, 5);
 }
 
-.right .btn{
+.btn-primary{
     font-family: "Poppins", sans-serif;
     background-color: #f5c518;
     text-decoration: none;
@@ -81,4 +81,14 @@ button{
 }
 .tag:first-child { 
     display: none;
-   }
+}
+
+.btn-primary-red{
+    font-family: "Poppins", sans-serif;
+    background-color: #FF0000;
+    text-decoration: none;
+    color: white;
+    padding: 6px;
+    font-size: 1rem;
+    border-radius: 20px;
+}

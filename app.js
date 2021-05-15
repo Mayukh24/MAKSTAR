@@ -15,6 +15,7 @@ const a = document.querySelector('.addList');
 const gcinema = document.getElementById('gcinema')
 const gseries = document.getElementById('gseries')
 const submitButton = document.querySelector(".search3")
+const x = document.getElementsByTagName("BODY")[0];
 
 
 
@@ -187,7 +188,7 @@ var l;
 var mId;
 var mIdS;
 var background;
-
+var v;
 
 function myFunction() {
     location.replace("search.html")
@@ -298,26 +299,35 @@ function movieSelected(id){
     return false;
 }
 
+var vid;
+
 function getIndividual(){
     let IndividualId = sessionStorage.getItem('movieId');
     const URLInd = `https://api.themoviedb.org/3/movie/${IndividualId}?api_key=a3d1d37e68ef5b6e3c68f6fa5f9ba613&language=en-US`;
+    const URLVid = `https://api.themoviedb.org/3/movie/${IndividualId}/videos?api_key=a3d1d37e68ef5b6e3c68f6fa5f9ba613&language=en-US`
+    axios.get(URLVid)
+    .then((response)=>{
+        let movieV = response.data;
+        const {results} = movieV;
+        vid = results[0].key;
+        console.log(vid);
+    })
     axios.get(URLInd)
     .then((response)=>{
         let movie = response.data;
         const { title, poster_path, overview, genres, release_date, vote_average, imdb_id, run_time, backdrop_path, production_companies, status, id, runtime} = movie
-        
+        console.log(response.data);
         n = ifItIncludes(id);
         mId = id;
-        
+        vId = vid;
+        console.log(vid);
+        v = vid;
         background = IMG_PATH + backdrop_path;
 
         $(document).ready(function() {
           $("body").css("background-image", `url(${background})`)
           .css("background-repeat", "no-repeat");
-      })
-
-
-        
+      })        
         var gen = (genres.map(function(obj) {
             return obj.name;
         }).join(","));
@@ -362,6 +372,7 @@ function getIndividual(){
           <div class="life">
             <button onclick="location.href='http://imdb.com/title/${imdb_id}'" class="btn btn-primary">View IMDB</button>
             <button id="button-s" class="btn btn-primary" onclick="chooseM()">Add to Watchlist</button>
+            <button onclick="openTrailer()" class="btn btn-primary-red">Watch Trailer</button>
           </div>
         </div>
       `;
@@ -401,21 +412,106 @@ function getIndividual(){
           <div class="life">
             <button onclick="location.href='http://imdb.com/title/${imdb_id}'" class="btn btn-primary">View IMDB</button>
             <button id="button-s" class="btn btn-primary" onclick="chooseM()">Remove from Watchlist</button>
+            <button onclick="openTrailer()" class="btn btn-primary-red">Watch Trailer</button>
           </div>
         </div>
       `;
-      if(n==true){
+      output2 =`
+        <div class="left">        
+          <div class="image-dp">
+            <img src="${IMG_PATH + poster_path}" class="thumbnail">
+          </div>
+          <div class = "info">
+            <h1>${title}</h1>
+            <p><strong>Genre:</strong> ${gen}</p>
+          <hr>
+          </div>
+          <div class="extra-info">
+          <h2>Information</h2>
+            <ul class="list-group">
+              <li class="list-group-item"><strong>Rating : </strong><i class="fas fa-star"></i> ${vote_average}</li>
+              <li class="list-group-item"><strong>Released : </strong> ${release_date}</li>
+              <li class="list-group-item"><strong>Duration : </strong> ${runtime} mins</li>
+              <li class="list-group-item"><strong>Status : </strong> ${status}</li>
+              <li class="list-group-item"><strong>Produced by : </strong> ${prod}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="right">
+        <div class = "info-right">
+        <h1>${title}</h1>
+          <p><strong>Genre:</strong> ${gen}</p>
+        </div>                  
+          <hr>
+          <div class="plot">
+            <h2>Synopsis</h2>
+            ${overview}
+            <hr>
+          </div>
+          <div class="life">
+            <button onclick="location.href='http://imdb.com/title/${imdb_id}'" class="btn btn-primary">View IMDB</button>
+            <button id="button-s" class="btn btn-primary" onclick="chooseM()">Add to Watchlist</button>
+          </div>
+        </div>
+      `;
+    output3 =`
+    <div class="left">        
+      <div class="image-dp">
+        <img src="${IMG_PATH + poster_path}" class="thumbnail">
+      </div>
+      <div class = "info">
+        <h1>${title}</h1>
+        <p><strong>Genre:</strong> ${gen}</p>
+      <hr>
+      </div>
+      <div class="extra-info">
+      <h2>Information</h2>
+        <ul class="list-group">
+          <li class="list-group-item"><strong>Rating : </strong><i class="fas fa-star"></i> ${vote_average}</li>
+          <li class="list-group-item"><strong>Released : </strong> ${release_date}</li>
+          <li class="list-group-item"><strong>Duration : </strong> ${runtime} mins</li>
+          <li class="list-group-item"><strong>Status : </strong> ${status}</li>
+          <li class="list-group-item"><strong>Produced by : </strong> ${prod}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="right">
+    <div class = "info-right">
+    <h1>${title}</h1>
+      <p><strong>Genre:</strong> ${gen}</p>
+    </div>                  
+      <hr>
+      <div class="plot">
+        <h2>Synopsis</h2>
+        ${overview}
+        <hr>
+      </div>
+      <div class="life">
+        <button onclick="location.href='http://imdb.com/title/${imdb_id}'" class="btn btn-primary">View IMDB</button>
+        <button id="button-s" class="btn btn-primary" onclick="chooseM()">Remove from Watchlist</button>
+      </div>
+    </div>
+  `;
+      if(n==true && vId!=undefined){
         $('#movie-details').html(output1);
       }
-      else{
+      else if(n==false && vId!=undefined){
         $('#movie-details').html(output);
+      }
+      else if(n==true && vId == undefined){
+        $('#movie-details').html(output3);
+      }
+      else{
+        $('#movie-details').html(output2);
       }
 
         
     })
     .catch((err)=>{
         console.log(err);
-    });   
+    });
+    
+    
 }
 
 //Series
@@ -428,13 +524,23 @@ function tvSelected(id){
 function getIndividualS(){
     let IndividualId = sessionStorage.getItem('movieId');
     const URLInd = `https://api.themoviedb.org/3/tv/${IndividualId}?api_key=a3d1d37e68ef5b6e3c68f6fa5f9ba613&language=en-US`;
+    const URLVid = `https://api.themoviedb.org/3/tv/${IndividualId}/videos?api_key=a3d1d37e68ef5b6e3c68f6fa5f9ba613&language=en-US`;
+    axios.get(URLVid)
+    .then((response)=>{
+        let movieV = response.data;
+        const {results} = movieV;
+        vid = results[0].key;
+        console.log(vid);
+    })
     axios.get(URLInd)
     .then((response)=>{
         let movie = response.data;
         const { name, poster_path, overview, genres, first_air_date, vote_average, imdb_id, backdrop_path, episode_run_time, status, number_of_seasons, production_companies, id} = movie
 
         l = ifItSIncludes(id);
-        mIdS = id;
+        mIdS = id;        
+        vId = vid;
+        v=vid;
 
         var gen = (genres.map(function(obj) {
             return obj.name;
@@ -491,6 +597,7 @@ function getIndividualS(){
           </div>
           <div class = "life">          
             <button id="button-s" class="btn btn-primary" onclick="chooseS()">Add to Watchlist</button>
+            <button onclick="openTrailer()" class="btn btn-primary-red">Watch Trailer</button>
           </div>
         </div>
       `;
@@ -530,20 +637,108 @@ function getIndividualS(){
           </div>
           <div class = "life">          
             <button id="button-s" class="btn btn-primary" onclick="chooseS()">Remove from Watchlist</button>
+            <button onclick="openTrailer()" class="btn btn-primary-red">Watch Trailer</button>
           </div>
         </div>
       `;
-      if(l == true){
+
+      let output2 =`
+        <div class="left">        
+          <div class="image-dp">
+            <img src="${IMG_PATH + poster_path}" class="thumbnail">
+          </div>
+          <div class = "info">
+            <h1>${name}</h1>
+            <p><strong>Genre:</strong> ${gen}</p>
+          <hr>
+          </div>
+          <div class="extra-info">
+          <h2>Information</h2>
+            <ul class="list-group">
+              <li class="list-group-item"><strong>Rating : </strong><i class="fas fa-star"></i> ${vote_average}</li>
+              <li class="list-group-item"><strong>Released : </strong> ${first_air_date}</li>
+              <li class="list-group-item"><strong>Duration : </strong> ${episode_run_time} mins per ep</li>
+              <li class="list-group-item"><strong>Status : </strong> ${status}</li>
+              <li class="list-group-item"><strong>Number of Seasons : </strong> ${number_of_seasons}</li>
+              <li class="list-group-item"><strong>Produced by : </strong> ${prod}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="right">        
+          <div class = "info-right">
+            <h1>${name}</h1>
+            <p><strong>Genre:</strong> ${gen}</p>
+          </div>                  
+          <hr>
+          <div class="plot">
+            <h2>Synopsis</h2>
+            ${overview}
+            <hr>
+          </div>
+          <div class = "life">          
+            <button id="button-s" class="btn btn-primary" onclick="chooseS()">Add to Watchlist</button>
+          </div>
+        </div>
+      `;
+
+      let output3 =`
+        <div class="left">        
+          <div class="image-dp">
+            <img src="${IMG_PATH + poster_path}" class="thumbnail">
+          </div>
+          <div class = "info">
+            <h1>${name}</h1>
+            <p><strong>Genre:</strong> ${gen}</p>
+          <hr>
+          </div>
+          <div class="extra-info">
+          <h2>Information</h2>
+            <ul class="list-group">
+              <li class="list-group-item"><strong>Rating : </strong><i class="fas fa-star"></i> ${vote_average}</li>
+              <li class="list-group-item"><strong>Released : </strong> ${first_air_date}</li>
+              <li class="list-group-item"><strong>Duration : </strong> ${episode_run_time} mins per ep</li>
+              <li class="list-group-item"><strong>Status : </strong> ${status}</li>
+              <li class="list-group-item"><strong>Number of Seasons : </strong> ${number_of_seasons}</li>
+              <li class="list-group-item"><strong>Produced by : </strong> ${prod}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="right">        
+          <div class = "info-right">
+            <h1>${name}</h1>
+            <p><strong>Genre:</strong> ${gen}</p>
+          </div>                  
+          <hr>
+          <div class="plot">
+            <h2>Synopsis</h2>
+            ${overview}
+            <hr>
+          </div>
+          <div class = "life">          
+            <button id="button-s" class="btn btn-primary" onclick="chooseS()">Remove from Watchlist</button>
+          </div>
+        </div>
+      `;
+
+      if(l==true && vId!=undefined){
         $('#movie-details').html(output1);
       }
-      else{
+      else if(l==false && vId!=undefined){
         $('#movie-details').html(output);
+      }
+      else if(l==true && vId == undefined){
+        $('#movie-details').html(output3);
+      }
+      else{
+        $('#movie-details').html(output2);
       }
 
     })
     .catch((err)=>{
         console.log(err);
-    });   
+    }); 
+    
+    
 }
 
 
@@ -647,7 +842,24 @@ function chooseM(){
   }
 }
 
+function openTrailer(){
+  const trailerDiv = document.createElement('div')
+  trailerDiv.classList.add('trailer')
+  video = v
+  console.log(video);
 
+  trailerDiv.innerHTML = `
+  <i id="cross" class="fad fa-times" onclick="closeMe()"></i>
+  <iframe src="https://www.youtube.com/embed/${video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  `
+  x.appendChild(trailerDiv);
+}
+
+function closeMe(){
+  console.log('CLOSED');
+  document.querySelector(".trailer").remove();
+}
+console.log(vid);
 
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////LOCAL STORAGE///////////////////////////////////////
@@ -910,8 +1122,6 @@ if(buttonLM!=null){
     document.querySelector(".scroll-c").scrollLeft -= (document.querySelector(".scroll-c").offsetWidth)- 200;
   };
 }
-
-
 //SERIES INDEX:-
 const buttonLS = document.querySelector('.slide-left-s');
 const buttonRS = document.querySelector('.slide-right-s');

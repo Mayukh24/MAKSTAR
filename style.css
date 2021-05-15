@@ -603,4 +603,34 @@ h1 {
   justify-content: space-between;
   align-items: center;
 }
-
+.trailer{
+  position: fixed;  
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  top: -50%;
+  left: 49.9%;
+  transform: translate(-50%, 50%);
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.903);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+iframe{
+  position: relative;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  width: 800px;
+  height: 480px;
+  border: none;
+}
+#cross{
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  cursor: pointer;
+  font-size: 32px;
+}

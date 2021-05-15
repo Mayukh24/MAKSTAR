@@ -455,4 +455,8 @@
     .slide-left-m, .slide-right-m, .slide-left-s, .slide-right-s, .slide-left-m1, .slide-right-m1, .slide-left-s1, .slide-right-s1, .slide-left-m2, .slide-right-m2, .slide-left-s2, .slide-right-s2, .slide-left-m3, .slide-right-m3, .slide-left-s3, .slide-right-s3{
         display: none;
     }
+    iframe{
+        width: 90%;
+        height: 35%;
+    }
 }
