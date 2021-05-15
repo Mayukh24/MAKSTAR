@@ -10,5 +10,6 @@ Its a simple website that helps user to discover movies and series. It uses TMdB
 **<h3>Features:</h3>**
   - Easy to use interface with eye catching animations.
   - Genre Sorting.
+  - Youtube Trailer Embeded
   - Wishlist Feature which enables the user to save their favourite movies and series which does not get deleted once the browser is closed and can only be removed by the user's choics
   - It's completely mobile responsive.
