@@ -459,4 +459,8 @@
         width: 90%;
         height: 35%;
     }
+    #cross{
+        top: 150px;
+        right: 20px;
+    }
 }
