@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mstyle.css" />
+    <link rel="stylesheet" href="responsive.css" />
+    <link href="https://kit-pro.fontawesome.com/releases/v5.15.3/css/pro.min.css" rel="stylesheet">
+    <link rel = "shortcut icon" type = "image/x-icon" href = "./images/makstarlogo_xAk_icon.ico"/>
+    <title>MakStar</title>
+  </head>
+  <body>
+    <header>
+      <div class="burger">
+        <div class="line1"></div>
+        <div class="line1"></div>
+        <div class="line1"></div>
+      </div>
+      <div class="logo-and-ul">
+        <a href = "index.html" class = "logo"><img src="./images/MAKSTAR.png" alt="Logo" height="50px"></a>
+        <ul class = "nav-links">
+          <li><a href = "movies.html">Movies</a></li>
+          <li><a href = "series.html">TV Shows</a></li>
+          <li><a href = "wishlist.html">Watchlist</a></li>
+          <li></li>
+        </ul>
+      </div>
+      <div class="right-hand-side">
+        <form id="form" autocomplete="off">
+          <input type="text" id="search" class="search1" placeholder="Search">
+          <button class = "search3" type = "submit">            
+            <i class="fal fa-search" class="search0"></i>
+          </button>
+      </form>
+    </div>     
+    </header>
+
+
+
+
+
+    <div class="heading-4">
+      <h1 id = "headin"></h1>     
+        <main id="gcinema"></main>        
+      </div>
+    </div>
+    <div class="button-container">
+      <button class = "btn btn-primary-white" onclick="getMeMoreMovies()">See More</button> 
+    </div>
+    
+
+    <script src="app.js"></script>
+    <script src="movies.js"></script>
+    <script>
+        getEMovies();
+    </script>
+  </body>
+</html>

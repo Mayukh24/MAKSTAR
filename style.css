@@ -157,12 +157,12 @@ form button{
 }
 
 
-.heading-1{
+.heading-10{
   margin-bottom: 1rem;
 }
 
 
-.heading-1 h1{
+.heading-10 h1{
   margin-top: 6rem;  
 }
 
@@ -585,7 +585,7 @@ h1 {
   margin: 5px;
 }
 
-.heading-2 h1{
+.heading-20 h1{
   padding-top: 0;
   margin-top: 0;
 }
@@ -665,4 +665,26 @@ iframe{
   right: 40px;
   cursor: pointer;
   font-size: 32px;
+}
+.heading-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.heading-1 a{
+  margin-top: 1.3rem;
+  margin-right: 20px;
+  color: rgb(0, 119, 255);
+  cursor: pointer;
+}
+.heading-1 a:hover{
+  color: rgb(0, 153, 255);
+}
+.heading-1 h1{
+  margin-top: 0;
+  padding: 0;
+}
+.heading-container{
+  margin-right: 0;
+  width: 100%;
 }

@@ -8,7 +8,7 @@ const lcinema = document.getElementById('lcinema')
 const ucinema = document.getElementById('ucinema')
 const dcinema = document.getElementById('movie_details')
 
-
+let t = 1;
 
 
 
@@ -122,4 +122,68 @@ function showLMovies(lmovies) {
     })
 }
 
+function tmovies(){
+    const URL = `https://api.themoviedb.org/3/movie/top_rated?api_key=a3d1d37e68ef5b6e3c68f6fa5f9ba613`
+    sessionStorage.setItem('getExtraMovies', URL);
+    sessionStorage.setItem('nameTypeMovie', 'Top Rated Movies');
+    location.replace("extramovies.html")
+}
+function pmovies(){
+    const URL = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=a3d1d37e68ef5b6e3c68f6fa5f9ba613`
+    sessionStorage.setItem('getExtraMovies', URL);
+    sessionStorage.setItem('nameTypeMovie', 'Popular Movies');
+    location.replace("extramovies.html")
+}
+function nmovies(){
+    const URL = `https://api.themoviedb.org/3/movie/upcoming?api_key=a3d1d37e68ef5b6e3c68f6fa5f9ba613`
+    sessionStorage.setItem('getExtraMovies', URL);
+    sessionStorage.setItem('nameTypeMovie', 'New Movies');
+    location.replace("extramovies.html")
+}
 
+
+
+///////EXTRAMOVIES//////
+async function getEMovies() {
+    const urlt = sessionStorage.getItem('getExtraMovies');  
+    const url = urlt + `&page=${t}`
+    console.log(url);
+    const nameTypeM = sessionStorage.getItem('nameTypeMovie');
+    document.getElementById("headin").innerHTML = nameTypeM;
+    console.log(nameTypeM);
+    const res = await fetch(url)
+    const data = await res.json()
+  
+    showEMovies(data.results)
+  }
+  
+  function showEMovies(lmovies) {
+  
+    lmovies.forEach((lmovie) => {
+        const { title, poster_path, overview, id } = lmovie
+  
+        var summary = overview.split(' ').slice(0,10).join(' ');
+  
+        const movieEl = document.createElement('div')
+        movieEl.classList.add('movie1')
+  
+        movieEl.innerHTML = `
+                <a onclick = "movieSelected('${id}')" href = "#"><img src="${IMG_PATH + poster_path}" alt="${title}" ></a>
+                <a onclick = "movieSelected('${id}')" href = "#">
+                    <div class="overview">
+                        <h3>${title}</h3>
+                        ${summary}...
+                    </div>
+                </a>
+        `
+        gcinema.appendChild(movieEl)
+    })
+  }
+  
+  function getMeMoreMovies(){
+    t++;
+    getEMovies();
+  }
+
+
+  
