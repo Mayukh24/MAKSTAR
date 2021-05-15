@@ -189,6 +189,8 @@ var mId;
 var mIdS;
 var background;
 var v;
+let i = 1;
+let j = 1;
 
 function myFunction() {
     location.replace("search.html")
@@ -997,7 +999,7 @@ async function getGMovies() {
   document.getElementById("headin").innerHTML = m + " Movies";
   console.log(m);
   const url = `
-  https://api.themoviedb.org/3/discover/movie?api_key=a3d1d37e68ef5b6e3c68f6fa5f9ba613&language=en-US&sort_by=popularity.desc&page=1&with_genres=${genreId}`;
+  https://api.themoviedb.org/3/discover/movie?api_key=a3d1d37e68ef5b6e3c68f6fa5f9ba613&language=en-US&sort_by=popularity.desc&page=${i}&with_genres=${genreId}`;
   const res = await fetch(url)
   const data = await res.json()
 
@@ -1028,6 +1030,11 @@ function showGMovies(lmovies) {
   })
 }
 
+function getMeMoreMovies(){
+  i++;
+  getGMovies();
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////SERIES GENRE/////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1056,7 +1063,6 @@ function selectSGenre(){
 }
 
 async function getGSeries() {
-  console.log('dhur bal');
   let mS;
   let genreSId = sessionStorage.getItem('genreSId');
   Sgenres.forEach(genreN => {
@@ -1068,7 +1074,7 @@ async function getGSeries() {
   document.getElementById("headin").innerHTML = mS + " Series";
   console.log(mS);
   const urls = `
-  https://api.themoviedb.org/3/discover/tv?api_key=a3d1d37e68ef5b6e3c68f6fa5f9ba613&sort_by=popularity.desc&page=1&with_genres=${genreSId}`;
+  https://api.themoviedb.org/3/discover/tv?api_key=a3d1d37e68ef5b6e3c68f6fa5f9ba613&sort_by=popularity.desc&page=${j}&with_genres=${genreSId}`;
   const res = await fetch(urls)
   const data = await res.json()
 
@@ -1078,8 +1084,6 @@ async function getGSeries() {
 
 function showGSeries(gtv) {
 
-  gseries.innerHTML = ''
-
     gtv.forEach((tv) => {
         const { name, poster_path, overview, id } = tv
 
@@ -1088,7 +1092,7 @@ function showGSeries(gtv) {
         const tvEl = document.createElement('div')
         tvEl.classList.add('tv1')
 
-        tvEl.innerHTML = `
+        tvEl.innerHTML += `
         <a onclick = "tvSelected('${id}')" href = "#"><img src="${IMG_PATH + poster_path}" alt="${name}" ></a>
         <a onclick = "tvSelected('${id}')" href = "#">
             <div class="overview">
@@ -1100,6 +1104,12 @@ function showGSeries(gtv) {
         gseries.appendChild(tvEl)
     })
 }
+
+function getMeMoreSeries(){
+  j++;
+  getGSeries();
+}
+
 
 function scrollL(){
   document.querySelector(".scroll-c").scrollLeft +=20;

@@ -342,9 +342,6 @@
     #tv-series-w{
         margin-left: 1.5rem;
     }
-    #cinema-s{
-        margin-left: 1.5rem;
-    }
     #tv-series-s{
         margin-left: 1.5rem;
     }
@@ -463,4 +460,26 @@
         top: 150px;
         right: 20px;
     }
+    .heading-4, .heading-5, .heading-3, .heading-8, .heading-7{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .heading-8, .heading-7{
+        flex-direction: column;
+        margin-bottom: 0;
+    }
+    .heading-8 h1{
+        margin-top: 4rem;
+    }
+    .heading-7 h1{
+        margin-top: 0;
+    }
+    #gseries, #gcinema, #cinema-s, #tv-series-s{
+        position: inherit;
+        margin: 0;
+        width: 320px;
+    }
+
 }
