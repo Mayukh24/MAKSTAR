@@ -1,6 +1,6 @@
 # MakStar
 
-## <a href="https://mayukh24.github.io/MakStar/" target="_blank">LIVE DEMO 🚀</a>
+## <a href="https://makstar.netlify.app" target="_blank">LIVE DEMO 🚀</a>
 
 <h3>Description:- </h3>
 Its a simple website that helps user to discover movies and series. It uses TMdB Api to fetch latest information from TmdB's huge database and brings the users popular, top rated and many more categories of movies and Series.<br>
